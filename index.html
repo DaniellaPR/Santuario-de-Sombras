@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santuario de Sombras</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="niebla"></div>
+  <div class="niebla niebla2"></div>
+
+  <section id="portada" class="pantalla">
+    <img src="assets/img/luna.png" alt="Luna" class="luna">
+
+    <div class="portada-contenido">
+      <h1>Santuario de Sombras</h1>
+      <p>
+        Un grimorio elegante de bestias, magia y reliquias ocultas.
+      </p>
+      <button id="abrirLibro">Abrir el grimorio</button>
+    </div>
+  </section>
+
+  <section id="santuario" class="pantalla oculto">
+    <h2>Las páginas despiertan</h2>
+    <p id="textoEstado">Toca los sellos para revelar los secretos del santuario.</p>
+
+    <div class="libro">
+      <div class="pagina izquierda">
+        <button class="sello" id="sello1">✦</button>
+        <button class="sello" id="sello2">☽</button>
+      </div>
+
+      <div class="pagina derecha">
+        <button class="sello" id="sello3">🜂</button>
+        <button class="sello" id="sello4">⟡</button>
+      </div>
+    </div>
+
+    <div id="vision" class="vision oculto">
+      <img id="imagenVision" src="" alt="Criatura revelada">
+      <h3 id="tituloVision">Nombre</h3>
+      <p id="textoVision">Texto secreto</p>
+    </div>
+
+    <div id="reliquiaFinal" class="reliquia-final oculto">
+      <img src="assets/img/reliquia-final.png" alt="Reliquia final">
+      <h3>La reliquia ha despertado</h3>
+      <p>
+        Has abierto los cuatro sellos. El santuario te reconoce como visitante de la noche.
+      </p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
