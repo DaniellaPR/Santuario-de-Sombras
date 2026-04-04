@@ -1,80 +1,72 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-image: linear-gradient(rgba(5, 8, 20, 0.75), rgba(12, 8, 25, 0.88)), url("assets/img/fondo-gotico.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #f3ecff;
+  color: #f6efff;
   font-family: Georgia, serif;
   overflow-x: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.8s ease, background-color 0.8s ease;
 }
 
-.pantalla {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
+body.fondo-base {
+  background-image:
+    linear-gradient(rgba(4, 5, 12, 0.82), rgba(11, 7, 18, 0.92)),
+    url("assets/img/FondoGotico.png");
+}
+
+body.ambiente-brujula {
+  background-image:
+    linear-gradient(rgba(5, 10, 20, 0.70), rgba(9, 16, 35, 0.82)),
+    url("assets/img/iglesia.jpg");
+}
+
+body.ambiente-vela {
+  background-image:
+    linear-gradient(rgba(16, 3, 8, 0.76), rgba(25, 6, 12, 0.88)),
+    url("assets/img/rojaIglesia.jpg");
+}
+
+body.ambiente-alas {
+  background-image:
+    linear-gradient(rgba(8, 8, 8, 0.78), rgba(20, 20, 28, 0.88)),
+    url("assets/img/CastilloGotico.jpg");
+}
+
+body.ambiente-muneco {
+  background-image:
+    linear-gradient(rgba(8, 8, 12, 0.76), rgba(18, 10, 20, 0.88)),
+    url("assets/img/FondoGotico.png");
 }
 
 .oculto {
   display: none;
 }
 
-.niebla {
-  position: fixed;
-  top: 0;
-  left: -20%;
-  width: 140%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.07), rgba(255,255,255,0));
-  animation: moverNiebla 12s infinite alternate;
-  pointer-events: none;
+.pantalla {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40px 20px 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.niebla2 {
-  animation-duration: 18s;
-  opacity: 0.5;
-}
-
-@keyframes moverNiebla {
-  from {
-    transform: translateX(0px);
-  }
-  to {
-    transform: translateX(60px);
-  }
-}
-
-.luna {
-  width: 130px;
-  margin: 0 auto 20px auto;
-  display: block;
-  animation: flotar 4s infinite ease-in-out;
-}
-
-@keyframes flotar {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.portada-contenido {
-  text-align: center;
-  max-width: 700px;
+.caja {
+  width: 90%;
+  max-width: 920px;
   margin: 0 auto;
-  background: rgba(10, 10, 20, 0.45);
+  background: rgba(9, 7, 18, 0.56);
   border: 1px solid rgba(255,255,255,0.12);
-  padding: 30px;
   border-radius: 24px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+  padding: 28px;
+  box-sizing: border-box;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.portada-caja {
+  text-align: center;
 }
 
 h1, h2, h3 {
@@ -83,135 +75,316 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 56px;
-  margin-bottom: 10px;
+  font-size: 54px;
+  margin-bottom: 12px;
 }
 
 h2 {
+  font-size: 36px;
   text-align: center;
-  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
 p {
-  line-height: 1.6;
+  line-height: 1.7;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-#abrirLibro {
-  margin-top: 20px;
-  padding: 14px 22px;
+p:hover {
+  transform: translateY(-1px);
+  color: #fff7ff;
+}
+
+button {
+  padding: 12px 18px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(to right, #5a2a82, #8d4fd1);
+  background: linear-gradient(to right, #4b2a69, #8b53c8);
   color: white;
-  font-size: 16px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 6px;
 }
 
-#abrirLibro:hover {
+button:hover {
   transform: scale(1.04);
+  box-shadow: 0 0 16px rgba(214, 178, 255, 0.25);
 }
 
-#textoEstado {
+.luna {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  width: 110px;
+  z-index: 1;
+  opacity: 0.85;
+  animation: flotar 5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.puerta-decorativa {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.niebla {
+  position: fixed;
+  bottom: 0;
+  left: -10%;
+  width: 130%;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+  animation: moverNiebla 14s infinite alternate ease-in-out;
+}
+
+.niebla2 {
+  opacity: 0.12;
+  animation-duration: 20s;
+}
+
+.brillos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brillito {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0.5;
+  animation: brillar 3s infinite alternate ease-in-out;
+}
+
+.letras-panel {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 18px 0 26px 0;
+}
+
+.letra-caja {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  margin: 0 6px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .libro {
-  width: 90%;
-  max-width: 900px;
-  min-height: 420px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 430px;
   display: flex;
-  gap: 0;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-  animation: aparecerLibro 1s ease;
-}
-
-@keyframes aparecerLibro {
-  from {
-    transform: scale(0.92) rotateX(10deg);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1) rotateX(0deg);
-    opacity: 1;
-  }
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+  animation: aparecerLibro 0.8s ease;
 }
 
 .pagina {
   width: 50%;
-  min-height: 420px;
-  background: linear-gradient(to bottom, #1b1626, #2a2136);
-  border: 1px solid rgba(255,255,255,0.08);
+  min-height: 430px;
+  background: linear-gradient(to bottom, rgba(27, 19, 40, 0.92), rgba(18, 14, 29, 0.95));
   position: relative;
 }
 
 .izquierda {
-  box-shadow: inset -8px 0 18px rgba(0, 0, 0, 0.35);
+  box-shadow: inset -8px 0 16px rgba(0,0,0,0.3);
 }
 
 .derecha {
-  box-shadow: inset 8px 0 18px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 8px 0 16px rgba(0,0,0,0.3);
 }
 
-.sello {
+.reliquia {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: radial-gradient(circle, rgba(157, 92, 255, 0.22), rgba(255,255,255,0.04));
-  color: #f7eaff;
-  font-size: 34px;
-  cursor: pointer;
-  box-shadow: 0 0 18px rgba(162, 94, 255, 0.25);
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-
-.sello:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 24px rgba(214, 184, 255, 0.45);
-}
-
-#sello1 {
-  top: 70px;
-  left: 70px;
-}
-
-#sello2 {
-  bottom: 70px;
-  right: 70px;
-}
-
-#sello3 {
-  top: 70px;
-  right: 70px;
-}
-
-#sello4 {
-  bottom: 70px;
-  left: 70px;
-}
-
-.vision {
-  width: 90%;
-  max-width: 700px;
-  margin: 30px auto 0 auto;
+  width: 160px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 14px;
+  border-radius: 20px;
   text-align: center;
-  background: rgba(13, 10, 25, 0.75);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 24px;
-  padding: 24px;
-  animation: aparecerVision 0.8s ease;
 }
 
-@keyframes aparecerVision {
+.reliquia img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 10px auto;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.reliquia:hover img {
+  transform: translateY(-4px) scale(1.06);
+  filter: drop-shadow(0 0 12px rgba(226, 188, 255, 0.35));
+}
+
+#reliquiaBrujula {
+  top: 55px;
+  left: 55px;
+}
+
+#reliquiaVela {
+  bottom: 55px;
+  right: 55px;
+}
+
+#reliquiaAlas {
+  top: 55px;
+  right: 55px;
+}
+
+#reliquiaMuneco {
+  bottom: 55px;
+  left: 55px;
+}
+
+.reliquia-resuelta {
+  box-shadow: 0 0 20px rgba(219, 188, 255, 0.35);
+  background: rgba(255,255,255,0.08);
+}
+
+.panel-bestia {
+  width: 90%;
+  max-width: 920px;
+  margin: 28px auto 0 auto;
+  animation: aparecerPanel 0.8s ease;
+}
+
+.bestia-arriba {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.bestia-arriba img {
+  width: 180px;
+  max-width: 70%;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 0 16px rgba(255,255,255,0.18));
+}
+
+.bestia-arriba img:hover {
+  transform: scale(1.06) translateY(-4px);
+  filter: drop-shadow(0 0 22px rgba(235, 216, 255, 0.35));
+}
+
+.historia-caja {
+  text-align: center;
+}
+
+.mensaje-juego {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #f4ddff;
+}
+
+.opciones-direccion button,
+.opciones-simbolo button,
+.velas button {
+  min-width: 90px;
+}
+
+.cadena-juego img {
+  width: 150px;
+  margin-bottom: 12px;
+  transition: transform 0.15s ease;
+}
+
+.cadena-juego img:active {
+  transform: scale(0.97);
+}
+
+.zona-final {
+  margin-top: 28px;
+  text-align: center;
+  animation: aparecerPanel 0.8s ease;
+}
+
+.cofre {
+  width: 150px;
+  margin-bottom: 12px;
+  animation: pulso 2.5s infinite ease-in-out;
+}
+
+input {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  width: 220px;
+  max-width: 80%;
+  margin: 10px;
+}
+
+.carta-final {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+}
+
+.carta-final img {
+  width: 180px;
+  max-width: 80%;
+  margin-bottom: 10px;
+}
+
+@keyframes moverNiebla {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(70px);
+  }
+}
+
+@keyframes flotar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes brillar {
+  from {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes aparecerLibro {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes aparecerPanel {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -219,57 +392,28 @@ p {
   }
 }
 
-.vision img {
-  width: 180px;
-  max-width: 80%;
-  margin-bottom: 10px;
-  filter: drop-shadow(0 0 20px rgba(255,255,255,0.12));
-}
-
-.reliquia-final {
-  width: 90%;
-  max-width: 650px;
-  margin: 30px auto 0 auto;
-  text-align: center;
-  background: linear-gradient(to bottom, rgba(35, 16, 52, 0.82), rgba(14, 10, 25, 0.92));
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 24px;
-  padding: 24px;
-  animation: aparecerVision 1s ease;
-}
-
-.reliquia-final img {
-  width: 130px;
-  animation: pulso 2s infinite ease-in-out;
-}
-
 @keyframes pulso {
   0% {
     transform: scale(1);
-    filter: drop-shadow(0 0 8px rgba(220, 190, 255, 0.25));
+    filter: drop-shadow(0 0 8px rgba(239, 216, 255, 0.2));
   }
   50% {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 18px rgba(220, 190, 255, 0.55));
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 18px rgba(239, 216, 255, 0.38));
   }
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 8px rgba(220, 190, 255, 0.25));
+    filter: drop-shadow(0 0 8px rgba(239, 216, 255, 0.2));
   }
 }
 
-.sello-abierto {
-  background: radial-gradient(circle, rgba(210, 175, 255, 0.35), rgba(255,255,255,0.08));
-  box-shadow: 0 0 26px rgba(230, 205, 255, 0.6);
-}
-
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   h1 {
-    font-size: 40px;
+    font-size: 38px;
   }
 
   h2 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .libro {
@@ -278,33 +422,38 @@ p {
 
   .pagina {
     width: 100%;
-    min-height: 240px;
+    min-height: 260px;
   }
 
-  #sello1, #sello2, #sello3, #sello4 {
-    top: auto;
-    left: auto;
-    right: auto;
+  .reliquia {
+    width: 140px;
+  }
+
+  #reliquiaBrujula {
+    top: 25px;
+    left: 25px;
+  }
+
+  #reliquiaVela {
+    top: 25px;
+    right: 25px;
     bottom: auto;
   }
 
-  #sello1 {
-    top: 30px;
-    left: 30px;
+  #reliquiaAlas {
+    bottom: 25px;
+    left: 25px;
+    top: auto;
+    right: auto;
   }
 
-  #sello2 {
-    top: 30px;
-    right: 30px;
+  #reliquiaMuneco {
+    bottom: 25px;
+    right: 25px;
+    left: auto;
   }
 
-  #sello3 {
-    bottom: 30px;
-    left: 30px;
-  }
-
-  #sello4 {
-    bottom: 30px;
-    right: 30px;
+  .puerta-decorativa {
+    width: 200px;
   }
 }
