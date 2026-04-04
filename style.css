@@ -1,0 +1,310 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(5, 8, 20, 0.75), rgba(12, 8, 25, 0.88)), url("assets/img/fondo-gotico.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #f3ecff;
+  font-family: Georgia, serif;
+  overflow-x: hidden;
+}
+
+.pantalla {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.oculto {
+  display: none;
+}
+
+.niebla {
+  position: fixed;
+  top: 0;
+  left: -20%;
+  width: 140%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.07), rgba(255,255,255,0));
+  animation: moverNiebla 12s infinite alternate;
+  pointer-events: none;
+}
+
+.niebla2 {
+  animation-duration: 18s;
+  opacity: 0.5;
+}
+
+@keyframes moverNiebla {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(60px);
+  }
+}
+
+.luna {
+  width: 130px;
+  margin: 0 auto 20px auto;
+  display: block;
+  animation: flotar 4s infinite ease-in-out;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.portada-contenido {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(10, 10, 20, 0.45);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+h1, h2, h3 {
+  font-family: "UnifrakturCook", cursive;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 56px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+#abrirLibro {
+  margin-top: 20px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(to right, #5a2a82, #8d4fd1);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#abrirLibro:hover {
+  transform: scale(1.04);
+}
+
+#textoEstado {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.libro {
+  width: 90%;
+  max-width: 900px;
+  min-height: 420px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  animation: aparecerLibro 1s ease;
+}
+
+@keyframes aparecerLibro {
+  from {
+    transform: scale(0.92) rotateX(10deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.pagina {
+  width: 50%;
+  min-height: 420px;
+  background: linear-gradient(to bottom, #1b1626, #2a2136);
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+
+.izquierda {
+  box-shadow: inset -8px 0 18px rgba(0, 0, 0, 0.35);
+}
+
+.derecha {
+  box-shadow: inset 8px 0 18px rgba(0, 0, 0, 0.35);
+}
+
+.sello {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: radial-gradient(circle, rgba(157, 92, 255, 0.22), rgba(255,255,255,0.04));
+  color: #f7eaff;
+  font-size: 34px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(162, 94, 255, 0.25);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.sello:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 24px rgba(214, 184, 255, 0.45);
+}
+
+#sello1 {
+  top: 70px;
+  left: 70px;
+}
+
+#sello2 {
+  bottom: 70px;
+  right: 70px;
+}
+
+#sello3 {
+  top: 70px;
+  right: 70px;
+}
+
+#sello4 {
+  bottom: 70px;
+  left: 70px;
+}
+
+.vision {
+  width: 90%;
+  max-width: 700px;
+  margin: 30px auto 0 auto;
+  text-align: center;
+  background: rgba(13, 10, 25, 0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 24px;
+  animation: aparecerVision 0.8s ease;
+}
+
+@keyframes aparecerVision {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.vision img {
+  width: 180px;
+  max-width: 80%;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.12));
+}
+
+.reliquia-final {
+  width: 90%;
+  max-width: 650px;
+  margin: 30px auto 0 auto;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(35, 16, 52, 0.82), rgba(14, 10, 25, 0.92));
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px;
+  padding: 24px;
+  animation: aparecerVision 1s ease;
+}
+
+.reliquia-final img {
+  width: 130px;
+  animation: pulso 2s infinite ease-in-out;
+}
+
+@keyframes pulso {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(220, 190, 255, 0.25));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 18px rgba(220, 190, 255, 0.55));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(220, 190, 255, 0.25));
+  }
+}
+
+.sello-abierto {
+  background: radial-gradient(circle, rgba(210, 175, 255, 0.35), rgba(255,255,255,0.08));
+  box-shadow: 0 0 26px rgba(230, 205, 255, 0.6);
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .libro {
+    flex-direction: column;
+  }
+
+  .pagina {
+    width: 100%;
+    min-height: 240px;
+  }
+
+  #sello1, #sello2, #sello3, #sello4 {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  #sello1 {
+    top: 30px;
+    left: 30px;
+  }
+
+  #sello2 {
+    top: 30px;
+    right: 30px;
+  }
+
+  #sello3 {
+    bottom: 30px;
+    left: 30px;
+  }
+
+  #sello4 {
+    bottom: 30px;
+    right: 30px;
+  }
+}
