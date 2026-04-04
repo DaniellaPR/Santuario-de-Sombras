@@ -1,86 +1,399 @@
-let abrirLibro = document.getElementById("abrirLibro");
+let body = document.body;
 let portada = document.getElementById("portada");
 let santuario = document.getElementById("santuario");
 
-let sello1 = document.getElementById("sello1");
-let sello2 = document.getElementById("sello2");
-let sello3 = document.getElementById("sello3");
-let sello4 = document.getElementById("sello4");
+// para layer 1
+let abrirLibro = document.getElementById("abrirLibro");
+let activarAudio = document.getElementById("activarAudio");
 
-let vision = document.getElementById("vision");
+// cada reliquia
+let reliquiaBrujula = document.getElementById("reliquiaBrujula");
+let reliquiaVela = document.getElementById("reliquiaVela");
+let reliquiaAlas = document.getElementById("reliquiaAlas");
+let reliquiaMuneco = document.getElementById("reliquiaMuneco");
 
-
-
-let imagenVision = document.getElementById("imagenVision");
-let tituloVision = document.getElementById("tituloVision");
-let textoVision = document.getElementById("textoVision");
+// cada bestia con su minijuego
+let panelBestia = document.getElementById("panelBestia");
+let imagenBestia = document.getElementById("imagenBestia");
+let tituloBestia = document.getElementById("tituloBestia");
+let textoBestia = document.getElementById("textoBestia");
+let zonaJuego = document.getElementById("zonaJuego");
+let mensajeJuego = document.getElementById("mensajeJuego");
 let textoEstado = document.getElementById("textoEstado");
-let reliquiaFinal = document.getElementById("reliquiaFinal");
 
-let secretosAbiertos = 0;
+// palabra final
+let letra1 = document.getElementById("letra1");
+let letra2 = document.getElementById("letra2");
+let letra3 = document.getElementById("letra3");
+let letra4 = document.getElementById("letra4");
 
-let secretos = {
-  sello1: {
-    nombre: "La Gárgola de Plata",
-    texto: "Guardiana de las torres olvidadas. Observa en silencio a quienes cargan una voluntad indomable.",
-    imagen: "assets/img/gargola.png"
+// final
+let zonaFinal = document.getElementById("zonaFinal");
+let inputPalabra = document.getElementById("inputPalabra");
+let abrirCofre = document.getElementById("abrirCofre");
+let cartaFinal = document.getElementById("cartaFinal");
+let brillos = document.getElementById("brillos");
+
+// iniciar sin audio
+let audioActivo = false;
+// y audios
+let musicaPortada = new Audio("assets/audio/medieval-waltz.mp3");
+let musicaAmbiente = new Audio();
+let sonidoAbrir = new Audio("assets/audio/book-opening-myinstants.mp3");
+let sonidoHover = new Audio("assets/audio/magic-wand-ping.mp3");
+let sonidoRevelar = new Audio("assets/audio/magic-reveal2-sound-effect.mp3");
+let sonidoPremio = new Audio("assets/audio/magico.mp3");
+let sonidoResolver = new Audio("assets/audio/detect-magic.mp3");
+
+// música:
+musicaPortada.loop = true;
+musicaAmbiente.loop = true;
+musicaPortada.volume = 0.06;
+musicaAmbiente.volume = 0.08;
+sonidoAbrir.volume = 0.25;
+sonidoHover.volume = 0.10;
+sonidoRevelar.volume = 0.22;
+sonidoPremio.volume = 0.22;
+sonidoResolver.volume = 0.24;
+
+let progreso = {
+  brujula: false,
+  vela: false,
+  alas: false,
+  muneco: false
+};
+
+let letras = {
+  brujula: "",
+  vela: "",
+  alas: "",
+  muneco: ""
+};
+
+let reliquias = {
+  brujula: {
+    titulo: "La Sombra Marina",
+    texto: "Nació entre brújulas rotas y mareas sin regreso. La arrastró el santuario cuando su rumbo fue quebrado, y ahora espera que alguien le devuelva una dirección verdadera.",
+    imagen: "assets/img/pirata-bestia.png",
+    clase: "ambiente-brujula",
+    musica: "assets/audio/medieval.mp3",
+    letra: "L"
   },
-  sello2: {
-    nombre: "La Serpiente del Eclipse",
-    texto: "Se desliza entre runas y promesas rotas. Su magia no pide permiso: reclama presencia.",
-    imagen: "assets/img/serpiente-mistica.png"
+  vela: {
+    titulo: "El Esqueleto de la Vela Negra",
+    texto: "Guardó una llama para no desaparecer. Lleva siglos ardiendo en un rincón del libro, con huesos de ceniza y una paciencia que da miedo y ternura a la vez.",
+    imagen: "assets/img/esqueleto-bestia.png",
+    clase: "ambiente-vela",
+    musica: "assets/audio/horror-atmosphere.mp3",
+    letra: "U"
   },
-  sello3: {
-    nombre: "El Cuervo del Umbral",
-    texto: "Mensajero de la noche elegante. Cruza puertas invisibles y deja ecos en los vitrales.",
-    imagen: "assets/img/cuervo.png"
+  alas: {
+    titulo: "El Cuervo del Umbral",
+    texto: "Fue atado con cadenas invisibles por cruzar puertas que no debía. Sus alas todavía recuerdan el cielo, pero necesita que alguien rompa su prisión.",
+    imagen: "assets/img/cuervo-bestia.jpg",
+    clase: "ambiente-alas",
+    musica: "assets/audio/horror.mp3",
+    letra: "N"
   },
-  sello4: {
-    nombre: "El Lobo Fantasma",
-    texto: "Bestia de humo, luna y acero. Avanza con una fuerza oscura y hermosa.",
-    imagen: "assets/img/lobo-fantasma.png"
+  muneco: {
+    titulo: "La Muñeca del Hilo Silente",
+    texto: "Cosida con recuerdos ajenos y un corazón quieto, llegó al santuario buscando una llave que le devolviera su nombre. Es hermosa, triste y peligrosa si se la deja sola demasiado tiempo.",
+    imagen: "assets/img/serpiente-bestiaa.png",
+    clase: "ambiente-muneco",
+    musica: "assets/audio/horror-atmosphere.mp3",
+    letra: "A"
   }
 };
+
+crearBrillos();
+
+activarAudio.addEventListener("click", function() {
+  audioActivo = true;
+  activarAudio.textContent = "Sonido activado";
+
+  musicaPortada.currentTime = 0;
+  musicaPortada.play();
+});
 
 abrirLibro.addEventListener("click", function() {
   portada.classList.add("oculto");
   santuario.classList.remove("oculto");
+
+  if (audioActivo) {
+    sonidoAbrir.currentTime = 0;
+    sonidoAbrir.play();
+    detenerMusicas();
+    musicaPortada.currentTime = 0;
+    musicaPortada.play();
+  }
 });
 
-sello1.addEventListener("click", function() {
-  abrirSecreto("sello1", sello1);
+reliquiaBrujula.addEventListener("click", function() {
+  abrirReliquia("brujula", reliquiaBrujula);
 });
 
-sello2.addEventListener("click", function() {
-  abrirSecreto("sello2", sello2);
+reliquiaVela.addEventListener("click", function() {
+  abrirReliquia("vela", reliquiaVela);
 });
 
-sello3.addEventListener("click", function() {
-  abrirSecreto("sello3", sello3);
+reliquiaAlas.addEventListener("click", function() {
+  abrirReliquia("alas", reliquiaAlas);
 });
 
-sello4.addEventListener("click", function() {
-  abrirSecreto("sello4", sello4);
+reliquiaMuneco.addEventListener("click", function() {
+  abrirReliquia("muneco", reliquiaMuneco);
 });
 
-function abrirSecreto(nombreSello, boton) {
-  let secreto = secretos[nombreSello];
+agregarHoverSonido(reliquiaBrujula);
+agregarHoverSonido(reliquiaVela);
+agregarHoverSonido(reliquiaAlas);
+agregarHoverSonido(reliquiaMuneco);
 
-  imagenVision.src = secreto.imagen;
-  tituloVision.textContent = secreto.nombre;
-  textoVision.textContent = secreto.texto;
+abrirCofre.addEventListener("click", function() {
+  let palabra = inputPalabra.value.toUpperCase();
 
-  vision.classList.remove("oculto");
+  if (palabra == "LUNA") {
+    cartaFinal.classList.remove("oculto");
 
-  if (boton.classList.contains("sello-abierto") == false) {
-    boton.classList.add("sello-abierto");
-    secretosAbiertos = secretosAbiertos + 1;
+    if (audioActivo) {
+      sonidoPremio.currentTime = 0;
+      sonidoPremio.play();
+    }
+  } else {
+    alert("La palabra todavía no es correcta.");
+  }
+});
+
+function abrirReliquia(nombre, boton) {
+  let datos = reliquias[nombre];
+
+  body.className = "";
+  body.classList.add(datos.clase);
+
+  imagenBestia.src = datos.imagen;
+  tituloBestia.textContent = datos.titulo;
+  textoBestia.textContent = datos.texto;
+  mensajeJuego.textContent = "";
+  panelBestia.classList.remove("oculto");
+
+  if (audioActivo) {
+    sonidoRevelar.currentTime = 0;
+    sonidoRevelar.play();
+
+    detenerMusicas();
+    musicaAmbiente.src = datos.musica;
+    musicaAmbiente.currentTime = 0;
+    musicaAmbiente.play();
   }
 
-  textoEstado.textContent = "Sellos abiertos: " + secretosAbiertos + " de 4";
+  crearMinijuego(nombre, boton);
+}
 
-  if (secretosAbiertos == 4) {
-    reliquiaFinal.classList.remove("oculto");
-    textoEstado.textContent = "Todos los secretos del grimorio han despertado.";
+function crearMinijuego(nombre, boton) {
+  zonaJuego.innerHTML = "";
+
+  if (nombre == "brujula") {
+    zonaJuego.innerHTML = `
+      <p>Ayúdala a recuperar el rumbo. Elige la dirección correcta.</p>
+      <div class="opciones-direccion">
+        <button onclick="resolverDireccion('Sur', 'brujula')">Sur</button>
+        <button onclick="resolverDireccion('Norte', 'brujula')">Norte</button>
+        <button onclick="resolverDireccion('Oeste', 'brujula')">Oeste</button>
+      </div>
+    `;
+  }
+
+  if (nombre == "vela") {
+    zonaJuego.innerHTML = `
+      <p>Enciende las tres velas en el orden correcto: centro, izquierda, derecha.</p>
+      <div class="velas">
+        <button onclick="agregarVela(1)">Izquierda</button>
+        <button onclick="agregarVela(2)">Centro</button>
+        <button onclick="agregarVela(3)">Derecha</button>
+      </div>
+    `;
+    ordenVelas = [];
+  }
+
+  if (nombre == "alas") {
+    zonaJuego.innerHTML = `
+      <p>Rompe la prisión. Haz clic varias veces sobre la cadena.</p>
+      <div class="cadena-juego">
+        <img src="assets/img/cadena.png" alt="Cadena" id="cadenaRomper">
+        <br>
+        <button onclick="romperCadena()">Romper cadena</button>
+      </div>
+    `;
+    clicsCadena = 0;
+  }
+
+  if (nombre == "muneco") {
+    zonaJuego.innerHTML = `
+      <p>Encuentra el símbolo que guarda su nombre verdadero.</p>
+      <div class="opciones-simbolo">
+        <button onclick="resolverSimbolo('ojo')">Ojo</button>
+        <button onclick="resolverSimbolo('llave')">Llave</button>
+        <button onclick="resolverSimbolo('luna')">Luna</button>
+      </div>
+    `;
+  }
+
+  reliquiaActual = nombre;
+  botonActual = boton;
+}
+
+let ordenVelas = [];
+let clicsCadena = 0;
+let reliquiaActual = "";
+let botonActual = null;
+
+function resolverDireccion(direccion, nombre) {
+  if (direccion == "Norte") {
+    completarReliquia(nombre);
+  } else {
+    mensajeJuego.textContent = "Ese no era el rumbo correcto.";
+  }
+}
+
+function agregarVela(numero) {
+  ordenVelas.push(numero);
+
+  if (ordenVelas.length == 3) {
+    if (ordenVelas[0] == 2 && ordenVelas[1] == 1 && ordenVelas[2] == 3) {
+      completarReliquia("vela");
+    } else {
+      mensajeJuego.textContent = "La llama se apagó. Intenta otra vez.";
+      ordenVelas = [];
+    }
+  }
+}
+
+function romperCadena() {
+  clicsCadena = clicsCadena + 1;
+
+  let cadena = document.getElementById("cadenaRomper");
+
+  if (cadena) {
+    cadena.style.transform = "scale(" + (1 - clicsCadena * 0.05) + ")";
+  }
+
+  if (clicsCadena >= 4) {
+    document.body.style.backgroundColor = "#000000";
+
+    setTimeout(function() {
+      document.body.style.backgroundColor = "";
+      completarReliquia("alas");
+    }, 400);
+  } else {
+    mensajeJuego.textContent = "La cadena se debilita...";
+  }
+}
+
+function resolverSimbolo(simbolo) {
+  if (simbolo == "llave") {
+    completarReliquia("muneco");
+  } else {
+    mensajeJuego.textContent = "Ese símbolo no abre su memoria.";
+  }
+}
+
+function completarReliquia(nombre) {
+  if (progreso[nombre] == true) {
+    mensajeJuego.textContent = "Esta bestia ya te entregó su letra.";
+    return;
+  }
+
+  progreso[nombre] = true;
+  letras[nombre] = reliquias[nombre].letra;
+
+  if (nombre == "brujula") {
+    letra1.textContent = letras[nombre];
+  }
+
+  if (nombre == "vela") {
+    letra2.textContent = letras[nombre];
+  }
+
+  if (nombre == "alas") {
+    letra3.textContent = letras[nombre];
+  }
+
+  if (nombre == "muneco") {
+    letra4.textContent = letras[nombre];
+  }
+
+  if (botonActual) {
+    botonActual.classList.add("reliquia-resuelta");
+  }
+
+  mensajeJuego.textContent = "La bestia te entregó la letra: " + reliquias[nombre].letra;
+  textoEstado.textContent = "Reliquias resueltas: " + contarResueltas() + " de 4";
+
+  if (audioActivo) {
+    sonidoResolver.currentTime = 0;
+    sonidoResolver.play();
+
+    setTimeout(function() {
+      sonidoPremio.currentTime = 0;
+      sonidoPremio.play();
+    }, 300);
+  }
+
+  if (contarResueltas() == 4) {
+    zonaFinal.classList.remove("oculto");
+    textoEstado.textContent = "Las cuatro letras han despertado el cofre.";
+  }
+}
+
+function contarResueltas() {
+  let total = 0;
+
+  if (progreso.brujula) {
+    total = total + 1;
+  }
+
+  if (progreso.vela) {
+    total = total + 1;
+  }
+
+  if (progreso.alas) {
+    total = total + 1;
+  }
+
+  if (progreso.muneco) {
+    total = total + 1;
+  }
+
+  return total;
+}
+
+function detenerMusicas() {
+  musicaPortada.pause();
+  musicaPortada.currentTime = 0;
+
+  musicaAmbiente.pause();
+  musicaAmbiente.currentTime = 0;
+}
+
+function agregarHoverSonido(elemento) {
+  elemento.addEventListener("mouseenter", function() {
+    if (audioActivo) {
+      sonidoHover.currentTime = 0;
+      sonidoHover.play();
+    }
+  });
+}
+
+function crearBrillos() {
+  for (let i = 0; i < 35; i++) {
+    let brillo = document.createElement("div");
+    brillo.className = "brillito";
+    brillo.textContent = "✦";
+    brillo.style.left = Math.random() * window.innerWidth + "px";
+    brillo.style.top = Math.random() * window.innerHeight + "px";
+    brillo.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    brillo.style.fontSize = (Math.random() * 10 + 8) + "px";
+
+    brillos.appendChild(brillo);
   }
 }
