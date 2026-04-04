@@ -3,60 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Santuario de Sombras</title>
+  <title>El Libro de las Reliquias Perdidas</title>
 
-  <!-- para la letra gótica -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="fondo-base">
 
   <div class="niebla"></div>
   <div class="niebla niebla2"></div>
+  <div class="brillos" id="brillos"></div>
+
+  <img src="assets/img/luna.png" alt="Luna" class="luna">
+  <img src="assets/img/puerta.png" alt="Puerta" class="puerta-decorativa">
 
   <section id="portada" class="pantalla">
-    <img src="assets/img/luna.png" alt="Luna" class="luna">
-
-    <div class="portada-contenido">
-      <h1>Santuario de Sombras</h1>
+    <div class="caja portada-caja">
+      <h1>El Libro de las Reliquias Perdidas</h1>
       <p>
-        Un grimorio elegante de bestias, magia y reliquias ocultas.
+        Has sido elegido. Las reliquias han despertado y cada bestia guarda una letra.
+        Reúne las cuatro y el cofre revelará su secreto.
       </p>
+
+      <button id="activarAudio">Activar sonido</button>
       <button id="abrirLibro">Abrir el grimorio</button>
     </div>
   </section>
 
   <section id="santuario" class="pantalla oculto">
-    <h2>Las páginas despiertan</h2>
-    <p id="textoEstado">Toca los sellos para revelar los secretos del santuario.</p>
+    <div class="caja">
+      <h2>Las reliquias llaman</h2>
+      <p id="textoEstado">Toca una reliquia para invocar su historia.</p>
 
-    <div class="libro">
-      <div class="pagina izquierda">
-        <button class="sello" id="sello1">✦</button>
-        <button class="sello" id="sello2">☽</button>
+      <div class="letras-panel">
+        <span class="letra-caja" id="letra1">_</span>
+        <span class="letra-caja" id="letra2">_</span>
+        <span class="letra-caja" id="letra3">_</span>
+        <span class="letra-caja" id="letra4">_</span>
       </div>
 
-      <div class="pagina derecha">
-        <button class="sello" id="sello3">🜂</button>
-        <button class="sello" id="sello4">⟡</button>
+      <div class="libro">
+        <div class="pagina izquierda">
+          <button class="reliquia" id="reliquiaBrujula">
+            <img src="assets/img/brujula.png" alt="Brújula">
+            <span>Brújula Rota</span>
+          </button>
+
+          <button class="reliquia" id="reliquiaVela">
+            <img src="assets/img/vela.png" alt="Vela">
+            <span>Vela Negra</span>
+          </button>
+        </div>
+
+        <div class="pagina derecha">
+          <button class="reliquia" id="reliquiaAlas">
+            <img src="assets/img/alas.png" alt="Alas">
+            <span>Alas del Umbral</span>
+          </button>
+
+          <button class="reliquia" id="reliquiaMuneco">
+            <img src="assets/img/muneco.png" alt="Muñeco">
+            <span>Muñeco del Silencio</span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div id="vision" class="vision oculto">
-      <img id="imagenVision" src="" alt="Criatura revelada">
-      <h3 id="tituloVision">Nombre</h3>
-      <p id="textoVision">Texto secreto</p>
+    <div id="panelBestia" class="panel-bestia oculto">
+      <div class="bestia-arriba">
+        <img id="imagenBestia" src="" alt="Bestia">
+      </div>
+
+      <div class="caja historia-caja">
+        <h3 id="tituloBestia">Bestia</h3>
+        <p id="textoBestia">Historia</p>
+
+        <div id="zonaJuego"></div>
+
+        <p id="mensajeJuego" class="mensaje-juego"></p>
+      </div>
     </div>
 
-    <div id="reliquiaFinal" class="reliquia-final oculto">
-      <img src="assets/img/reliquia-final.png" alt="Reliquia final">
-      <h3>La reliquia ha despertado</h3>
+    <div id="zonaFinal" class="caja zona-final oculto">
+      <img src="assets/img/cofre.png" alt="Cofre" class="cofre">
+      <h3>El cofre ha despertado</h3>
       <p>
-        Has abierto los cuatro sellos. El santuario te reconoce como visitante de la noche.
+        Las bestias te han entregado cuatro letras. Escríbelas en orden para abrir el sello final.
       </p>
+
+      <input type="text" id="inputPalabra" maxlength="4" placeholder="Escribe la palabra">
+      <button id="abrirCofre">Abrir cofre</button>
+
+      <div id="cartaFinal" class="carta-final oculto">
+        <img src="assets/img/carta-final.png" alt="Carta final">
+        <p>
+          Entre ruinas, niebla y reliquias antiguas, el santuario guardaba algo más raro que cualquier bestia:
+          una presencia imposible de olvidar.
+        </p>
+      </div>
     </div>
   </section>
 
