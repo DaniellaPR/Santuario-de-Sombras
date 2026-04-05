@@ -223,8 +223,8 @@ button:hover {
 }
 
 .reliquia img {
-  width: 80px;
-  height: 80px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
   display: block;
   margin: 0 auto 10px auto;
@@ -274,8 +274,7 @@ button:hover {
 }
 
 .bestia-arriba img {
-  width: 180px;
-  max-width: 70%;
+  width: 480px;
   transition: transform 0.25s ease, filter 0.25s ease;
   filter: drop-shadow(0 0 16px rgba(255,255,255,0.18));
 }
@@ -340,7 +339,7 @@ input {
 }
 
 .carta-final img {
-  width: 180px;
+  width: 380px;
   max-width: 80%;
   margin-bottom: 10px;
 }
