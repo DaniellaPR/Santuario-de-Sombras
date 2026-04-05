@@ -92,7 +92,7 @@ let reliquias = {
   alas: {
     titulo: "El Cuervo del Umbral",
     texto: "Fue atado con cadenas invisibles por cruzar puertas que no debía. Sus alas todavía recuerdan el cielo, pero necesita que alguien rompa su prisión.",
-    imagen: "assets/img/cuervo-bestia.jpg",
+    imagen: "assets/img/cuervo-bestiaa.jpg",
     clase: "ambiente-alas",
     musica: "assets/audio/magico.mp3",
     letra: "N"
