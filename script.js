@@ -43,7 +43,7 @@ let sonidoAbrir = new Audio("assets/audio/book-opening-myinstants.mp3");
 let sonidoHover = new Audio("assets/audio/magic-wand-ping.mp3");
 let sonidoRevelar = new Audio("assets/audio/magic-reveal2-sound-effect.mp3");
 let sonidoPremio = new Audio("book-opening-myinstants.mp3");
-let sonidoResolver = new Audio("assets/audio/detect-magic.mp3");
+let sonidoResolver = new Audio("assets/audio/magic-wand-ping.mp3");
 let sonidoError = new Audio("assets/audio/ElevenLabs_susurro_binaural_femenino,_murmullo_débil,_voz_desencarnada,_etérea,_espíritu,_psicosis,_esquizofren.mp3");
 
 // música:
