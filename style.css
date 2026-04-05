@@ -344,6 +344,44 @@ input {
   margin-bottom: 10px;
 }
 
+
+/* para scroll */
+
+.indicador-scroll {
+  margin-top: 28px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.indicador-scroll span {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  margin-bottom: 6px;
+}
+
+.flecha-scroll {
+  font-size: 28px;
+  animation: bajarSubir 1.5s infinite ease-in-out;
+}
+
+@keyframes bajarSubir {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+}
+
+
 @keyframes moverNiebla {
   from {
     transform: translateX(0px);
