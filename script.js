@@ -37,24 +37,26 @@ let brillos = document.getElementById("brillos");
 // iniciar sin audio
 let audioActivo = false;
 // y audios
-let musicaPortada = new Audio("assets/audio/medieval-waltz.mp3");
+let musicaPortada = new Audio("assets/audio/medieval.mp3");
 let musicaAmbiente = new Audio();
 let sonidoAbrir = new Audio("assets/audio/book-opening-myinstants.mp3");
 let sonidoHover = new Audio("assets/audio/magic-wand-ping.mp3");
 let sonidoRevelar = new Audio("assets/audio/magic-reveal2-sound-effect.mp3");
-let sonidoPremio = new Audio("assets/audio/magico.mp3");
+let sonidoPremio = new Audio("assets/audio/detect-magic.mp3");
 let sonidoResolver = new Audio("assets/audio/detect-magic.mp3");
+let sonidoError = new Audio("assets/audio/ElevenLabs_susurro_binaural_femenino,_murmullo_débil,_voz_desencarnada,_etérea,_espíritu,_psicosis,_esquizofren.mp3");
 
 // música:
 musicaPortada.loop = true;
 musicaAmbiente.loop = true;
-musicaPortada.volume = 0.06;
-musicaAmbiente.volume = 0.08;
-sonidoAbrir.volume = 0.25;
-sonidoHover.volume = 0.10;
-sonidoRevelar.volume = 0.22;
-sonidoPremio.volume = 0.22;
-sonidoResolver.volume = 0.24;
+musicaPortada.volume = 0.05;
+musicaAmbiente.volume = 0.07;
+sonidoAbrir.volume = 0.18;
+sonidoHover.volume = 0.08;
+sonidoRevelar.volume = 0.16;
+sonidoPremio.volume = 0.20;
+sonidoResolver.volume = 0.20;
+sonidoError.volume = 0.18;
 
 let progreso = {
   brujula: false,
@@ -76,7 +78,7 @@ let reliquias = {
     texto: "Nació entre brújulas rotas y mareas sin regreso. La arrastró el santuario cuando su rumbo fue quebrado, y ahora espera que alguien le devuelva una dirección verdadera.",
     imagen: "assets/img/pirata-bestia.png",
     clase: "ambiente-brujula",
-    musica: "assets/audio/medieval.mp3",
+    musica: "assets/audio/medieval-waltz.mp3",
     letra: "L"
   },
   vela: {
@@ -92,7 +94,7 @@ let reliquias = {
     texto: "Fue atado con cadenas invisibles por cruzar puertas que no debía. Sus alas todavía recuerdan el cielo, pero necesita que alguien rompa su prisión.",
     imagen: "assets/img/cuervo-bestia.jpg",
     clase: "ambiente-alas",
-    musica: "assets/audio/horror.mp3",
+    musica: "assets/audio/magico.mp3",
     letra: "N"
   },
   muneco: {
@@ -100,7 +102,7 @@ let reliquias = {
     texto: "Cosida con recuerdos ajenos y un corazón quieto, llegó al santuario buscando una llave que le devolviera su nombre. Es hermosa, triste y peligrosa si se la deja sola demasiado tiempo.",
     imagen: "assets/img/serpiente-bestiaa.png",
     clase: "ambiente-muneco",
-    musica: "assets/audio/horror-atmosphere.mp3",
+    musica: "assets/audio/mvnocopyrightmusic-game-of-shadows-414905.mp3",
     letra: "A"
   }
 };
@@ -122,9 +124,6 @@ abrirLibro.addEventListener("click", function() {
   if (audioActivo) {
     sonidoAbrir.currentTime = 0;
     sonidoAbrir.play();
-    detenerMusicas();
-    musicaPortada.currentTime = 0;
-    musicaPortada.play();
   }
 });
 
@@ -252,6 +251,11 @@ function resolverDireccion(direccion, nombre) {
     completarReliquia(nombre);
   } else {
     mensajeJuego.textContent = "Ese no era el rumbo correcto.";
+
+    if (audioActivo) {
+      sonidoError.currentTime = 0;
+      sonidoError.play();
+    }
   }
 }
 
@@ -264,6 +268,11 @@ function agregarVela(numero) {
     } else {
       mensajeJuego.textContent = "La llama se apagó. Intenta otra vez.";
       ordenVelas = [];
+      
+      if (audioActivo) {
+        sonidoError.currentTime = 0;
+        sonidoError.play();
+      }
     }
   }
 }
@@ -293,7 +302,12 @@ function resolverSimbolo(simbolo) {
   if (simbolo == "llave") {
     completarReliquia("muneco");
   } else {
-    mensajeJuego.textContent = "Ese símbolo no abre su memoria.";
+   mensajeJuego.textContent = "Ese símbolo no abre su memoria.";
+
+  if (audioActivo) {
+    sonidoError.currentTime = 0;
+    sonidoError.play();
+    }
   }
 }
 
