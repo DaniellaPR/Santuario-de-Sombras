@@ -420,6 +420,7 @@ function agregarHoverSonido(elemento) {
   });
 }
 
+
 function crearBrillos() {
   for (let i = 0; i < 35; i++) {
     let brillo = document.createElement("div");
