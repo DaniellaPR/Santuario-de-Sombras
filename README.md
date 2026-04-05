@@ -15,7 +15,7 @@ Cada reliquia representa una “bestia” con identidad visual, sonora y mecáni
 
 | Inicio | Grimorio |
 |--------|----------|
-| <img src="https://github.com/user-attachments/assets/0da13899-5623-45f8-b6ab-7bab46948878" width="500"> | <img src="https://github.com/user-attachments/assets/660eb01e-43b0-4305-a780-6ee55b2dfd03" width="500"> |
+| <img src="https://github.com/user-attachments/assets/0da13899-5623-45f8-b6ab-7bab46948878" width="500"> | <img src="https://github.com/user-attachments/assets/976f18a1-12a6-47ef-a620-dd45f10e76f0" width="500"/> |
 
 | Bestia | Final |
 |--------|-------|
