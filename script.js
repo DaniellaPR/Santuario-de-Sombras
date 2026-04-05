@@ -42,7 +42,7 @@ let musicaAmbiente = new Audio();
 let sonidoAbrir = new Audio("assets/audio/book-opening-myinstants.mp3");
 let sonidoHover = new Audio("assets/audio/magic-wand-ping.mp3");
 let sonidoRevelar = new Audio("assets/audio/magic-reveal2-sound-effect.mp3");
-let sonidoPremio = new Audio("assets/audio/detect-magic.mp3");
+let sonidoPremio = new Audio("book-opening-myinstants.mp3");
 let sonidoResolver = new Audio("assets/audio/detect-magic.mp3");
 let sonidoError = new Audio("assets/audio/ElevenLabs_susurro_binaural_femenino,_murmullo_débil,_voz_desencarnada,_etérea,_espíritu,_psicosis,_esquizofren.mp3");
 
@@ -176,10 +176,12 @@ function abrirReliquia(nombre, boton) {
   panelBestia.classList.remove("oculto");
 
   if (audioActivo) {
+    detenerMusicas();
+    detenerEfectos();
+  
     sonidoRevelar.currentTime = 0;
     sonidoRevelar.play();
-
-    detenerMusicas();
+  
     musicaAmbiente.src = datos.musica;
     musicaAmbiente.currentTime = 0;
     musicaAmbiente.play();
@@ -387,6 +389,26 @@ function detenerMusicas() {
 
   musicaAmbiente.pause();
   musicaAmbiente.currentTime = 0;
+}
+
+function detenerEfectos() {
+  sonidoAbrir.pause();
+  sonidoAbrir.currentTime = 0;
+
+  sonidoHover.pause();
+  sonidoHover.currentTime = 0;
+
+  sonidoRevelar.pause();
+  sonidoRevelar.currentTime = 0;
+
+  sonidoPremio.pause();
+  sonidoPremio.currentTime = 0;
+
+  sonidoResolver.pause();
+  sonidoResolver.currentTime = 0;
+
+  sonidoError.pause();
+  sonidoError.currentTime = 0;
 }
 
 function agregarHoverSonido(elemento) {
