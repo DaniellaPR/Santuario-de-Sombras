@@ -118,13 +118,12 @@ button:hover {
 
 .luna {
   position: fixed;
-  top: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%);
+  top: 24px;
+  right: 32px;
   width: 320px;
   z-index: 1;
   opacity: 0.85;
-  animation: flotar 5s infinite ease-in-out;
+  animation: flotar 5s infinite ease-in-out, aparecerPanel 0.8s ease;;
   pointer-events: none;
 }
 
