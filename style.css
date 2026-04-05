@@ -117,7 +117,7 @@ button:hover {
 }
 
 .luna {
-  position: fixed;
+  position: absolute;
   top: 24px;
   right: 32px;
   width: 320px;
