@@ -2,9 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El libro de las reliquias perdidas</title>
+  <!-- se vea bien en móvil -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>El Libro de las Reliquias Perdidas</title>
 
+  <!-- Fuente para títulos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -12,110 +14,133 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-  
-<body class="fondo-base">
-  <div class="niebla"></div>
-  <div class="niebla niebla2"></div>
-  <div class="brillos" id="brillos"></div>
+<body>
 
-  <img src="assets/img/luna.png" alt="Luna" class="luna">
-  <img src="assets/img/puerta.png" alt="Puerta" class="puerta-decorativa">
+  <!--  Niebla, partículas de luz e imágenes decorativas -->
+  <div class="niebla niebla-1"></div>
+  <div class="niebla niebla-2"></div>
+  <div id="contenedor-brillos" class="contenedor-brillos"></div>
+  <img src="assets/img/luna.png" alt="" class="deco-luna" aria-hidden="true">
+  <img src="assets/img/puerta.png" alt="" class="deco-puerta" aria-hidden="true">
 
-  <section id="portada" class="pantalla">
-    <div class="caja portada-caja">
+
+  <!-- PANTALLA 1 — PORTADA -->
+  <section id="pantalla-portada" class="pantalla">
+    <div class="caja caja-centrada">
       <h1>El Libro de las Reliquias Perdidas</h1>
-      <p>
-        Has sido elegidaa!. 
-        Las reliquias han despertado y cada bestia guarda una letra.
+      <p class="subtitulo">
+        Has sido elegida.<br>
+        Las reliquias han despertado y cada bestia guarda una letra.<br>
         Reúne las cuatro y el cofre revelará su secreto.
       </p>
 
-      <button id="activarAudio">Activar sonido</button>
-      <button id="abrirLibro">Abrir el grimorio</button>
-      
-      <div class="indicador-scroll">
-        <span>desciende</span>
-        <div class="flecha-scroll">↓</div>
-      </div>
-      
+      <!-- sonido -->
+      <button id="btn-activar-sonido" class="btn-secundario">🔇 Activar sonido</button>
+      <button id="btn-abrir-grimorio" class="btn-principal">Abrir el grimorio</button>
     </div>
   </section>
 
-  <section id="santuario" class="pantalla oculto">
+
+  <!-- PANTALLA 2 — GRIMORIO con selección de reliquias -->
+  <section id="pantalla-grimorio" class="pantalla oculto">
     <div class="caja">
       <h2>Las reliquias llaman</h2>
-      <p id="textoEstado">Toca una reliquia para invocar su historia.</p>
+      <p id="texto-estado" class="texto-estado">Toca una reliquia para invocar su historia.</p>
 
-      <div class="letras-panel">
-        <span class="letra-caja" id="letra1">_</span>
-        <span class="letra-caja" id="letra2">_</span>
-        <span class="letra-caja" id="letra3">_</span>
-        <span class="letra-caja" id="letra4">_</span>
+      <!-- Letras recolectadas: se llenan al completar cada bestia -->
+      <div class="panel-letras" aria-label="Letras recolectadas">
+        <span class="caja-letra" id="letra-1">_</span>
+        <span class="caja-letra" id="letra-2">_</span>
+        <span class="caja-letra" id="letra-3">_</span>
+        <span class="caja-letra" id="letra-4">_</span>
       </div>
 
-      <div class="libro">
-        <div class="pagina izquierda">
-          <button class="reliquia" id="reliquiaBrujula">
-            <img src="assets/img/brujula.png" alt="Brújula">
+      <!-- El libro con sus 4 reliquias como páginas -->
+      <div class="libro" role="list" aria-label="Reliquias del grimorio">
+
+        <div class="pagina pagina-izquierda">
+          <button class="reliquia" id="reliquia-brujula" role="listitem" aria-label="Brújula Rota">
+            <img src="assets/img/brujula.png" alt="Brújula rota">
             <span>Brújula Rota</span>
           </button>
 
-          <button class="reliquia" id="reliquiaVela">
-            <img src="assets/img/vela.png" alt="Vela">
+          <button class="reliquia" id="reliquia-vela" role="listitem" aria-label="Vela Negra">
+            <img src="assets/img/vela.png" alt="Vela negra encendida">
             <span>Vela Negra</span>
           </button>
         </div>
 
-        <div class="pagina derecha">
-          <button class="reliquia" id="reliquiaAlas">
-            <img src="assets/img/alas.png" alt="Alas">
+        <div class="pagina pagina-derecha">
+          <button class="reliquia" id="reliquia-alas" role="listitem" aria-label="Alas del Umbral">
+            <img src="assets/img/alas.png" alt="Alas del umbral">
             <span>Alas del Umbral</span>
           </button>
 
-          <button class="reliquia" id="reliquiaMuneco">
-            <img src="assets/img/muneco.png" alt="Muñeco">
+          <button class="reliquia" id="reliquia-muneco" role="listitem" aria-label="Muñeco del Silencio">
+            <img src="assets/img/muneco.png" alt="Muñeco del silencio">
             <span>Muñeco del Silencio</span>
           </button>
         </div>
+
       </div>
     </div>
 
-    <div id="panelBestia" class="panel-bestia oculto">
-      <div class="bestia-arriba">
-        <img id="imagenBestia" src="" alt="Bestia">
+
+    <!-- PANEL DE BESTIA  al tocar una reliquia
+         Muestra la imagen, historia y minijuego de cada bestia -->
+    <div id="panel-bestia" class="panel-bestia oculto">
+
+      <!-- Imagen grande de la bestia -->
+      <div class="contenedor-imagen-bestia">
+        <img id="imagen-bestia" src="" alt="Bestia convocada">
       </div>
 
-      <div class="caja historia-caja">
-        <h3 id="tituloBestia">Bestia</h3>
-        <p id="textoBestia">Historia</p>
+      <!-- Historia y minijuego -->
+      <div class="caja caja-historia">
+        <h3 id="titulo-bestia">Bestia</h3>
+        <p id="texto-bestia">Historia de la bestia.</p>
 
-        <div id="zonaJuego"></div>
+        <!-- Aquí el JS construye el minijuego según la bestia -->
+        <div id="zona-juego"></div>
 
-        <p id="mensajeJuego" class="mensaje-juego"></p>
+        <!-- Mensajes de feedback: "fallaste", "casi", "¡lo lograste!" -->
+        <p id="mensaje-juego" class="mensaje-juego" aria-live="polite"></p>
       </div>
+
     </div>
 
-    <div id="zonaFinal" class="caja zona-final oculto">
-      <img src="assets/img/cofre.png" alt="Cofre" class="cofre">
+
+    <!-- =ZONA FINAL (cofre) —  al completar las 4 bestias -->
+    <div id="zona-final" class="caja zona-final oculto">
+      <img src="assets/img/cofre.png" alt="Cofre mágico" class="img-cofre">
       <h3>El cofre ha despertado</h3>
-      <p>
-        Las bestias te han entregado cuatro letras. Escríbelas en orden para abrir el sello final.
-      </p>
+      <p>Las bestias te entregaron cuatro letras. Escríbelas en orden para romper el sello.</p>
 
-      <input type="text" id="inputPalabra" maxlength="4" placeholder="Escribe la palabra">
-      <button id="abrirCofre">Abrir cofre</button>
+      <input
+        type="text"
+        id="input-palabra"
+        maxlength="4"
+        placeholder="Escribe la palabra"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="characters"
+        aria-label="Escribe la palabra secreta"
+      >
+      <button id="btn-abrir-cofre" class="btn-principal">Abrir cofre</button>
 
-      <div id="cartaFinal" class="carta-final oculto">
-        <img src="assets/img/carta-final.png" alt="Carta final">
-        <p>
-          Entre ruinas, niebla y reliquias antiguas, el santuario guardaba algo más raro que cualquier bestia:
+      <!-- Carta final — oculta hasta que ingrese la palabra correcta -->
+      <div id="carta-final" class="carta-final oculto">
+        <img src="assets/img/carta-final.png" alt="Carta final revelada">
+        <p class="texto-carta">
+          Entre ruinas, niebla y reliquias antiguas,<br>
+          el santuario guardaba algo más raro que cualquier bestia:<br>
           una presencia imposible de olvidar.
         </p>
       </div>
     </div>
+
   </section>
+  
   <script src="script.js"></script>
 </body>
-
-  
 </html>
